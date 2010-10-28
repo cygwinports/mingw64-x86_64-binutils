@@ -1,0 +1,3 @@
+category: Devel
+requires: libgcc1 libintl8 zlib0
+sdesc: "Binutils for MinGW-w64 Win64 toolchain"
