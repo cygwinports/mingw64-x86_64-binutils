@@ -1,0 +1,25 @@
+TOOLCHAIN_TARGET="x86_64-w64-mingw32"
+inherit toolchain
+
+NAME="mingw64-x86_64-binutils"
+VERSION=2.22.52
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Binutils for Win64 toolchain"
+DESCRIPTION="This package contains various GNU compilers, assemblers, linkers,
+debuggers, etc., plus their support routines, definitions, and documentation."
+HOMEPAGE="http://mingw-w64.sourceforge.net/"
+case ${PV[3]} in
+[5-9][0-9])
+	SRC_URI="mirror://sourceware/binutils/snapshots/binutils-${VERSION}.tar.bz2" ;;
+*)	SRC_URI="mirror://gnu/binutils/binutils-${VERSION}.tar.bz2" ;;
+esac
+SRC_DIR="binutils-${VERSION}"
+
+src_install() {
+	cd ${B}
+	cyginstall
+
+	# conflicts with native binutils
+	rm -fr ${D}/usr/lib/ ${D}/usr/share/{info,locale}/
+}
